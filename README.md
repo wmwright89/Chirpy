@@ -45,7 +45,7 @@ Chirpy is a backend RESTful API built for a Boot.dev backend course. It provides
    Configure the required variables:
 
    ```env
-   DB_URL="postgres://postgres:postgres@localhost:5432/chirpy?sslmode=disable"
+   DB_URL="postgres://postgres:<password>@localhost:5432/chirpy?sslmode=disable"
    PORT=8080
    PLATFORM="dev"
    SECRET="your-jwt-secret-key"
