@@ -23,6 +23,8 @@ type APIConfig = {
     fileserverHits: number;
     port: number;
     platform: string;
+    secret: string;
+    polkaKey: string;
 };
 
 type CombinedConfig = {
@@ -35,6 +37,8 @@ export const config: CombinedConfig = {
         fileserverHits: 0,
         port: Number(envOrThrow("PORT")),
         platform: envOrThrow("PLATFORM"),
+        secret: envOrThrow("SECRET"),
+        polkaKey: envOrThrow("POLKA_KEY"),
     },
     dbConfig: {
         dbURL: envOrThrow("DB_URL"),

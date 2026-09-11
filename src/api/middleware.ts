@@ -25,18 +25,28 @@ export function middlewareMetricsInc(
 
 export function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
     if (err instanceof NotFound) {
-        res.status(404).json({ error: err.message });
+        return res.status(404).json({ error: err.message });
     }
     if (err instanceof Forbidden) {
-        res.status(403).json({ error: err.message });
+        return res.status(403).json({ error: err.message });
     }
     if (err instanceof Unauthorized) {
-        res.status(401).json({ error: err.message });
+        return res.status(401).json({ error: err.message });
     }
     if (err instanceof BadRequest) {
-        res.status(400).json({ error: err.message });
+        return res.status(400).json({ error: err.message });
     }
     else {
-        res.status(500).json({ error: "Something went wrong on our end" });
+        return res.status(500).json({ error: "Something went wrong on our end" });
     }
+}
+
+export function wrapAsync(handler: (req: Request, res: Response) => Promise<any> ) {
+    return async (req: Request, res: Response, next: NextFunction) => {
+        try{
+            await handler(req, res);
+        } catch (err) {
+            next(err);
+        }
+    };
 }
